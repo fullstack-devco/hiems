@@ -1,0 +1,43 @@
+CREATE TABLE user_tbl (
+   user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   user_fname VARCHAR(50) NOT NULL,
+   user_mname VARCHAR(50) NOT NULL,
+   user_lname VARCHAR(50) NOT NULL,
+   user_email VARCHAR(50) NOT NULL,
+   user_pw VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE session_tbl (
+   session_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   session_status INT NOT NULL,
+   user_id INT NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES user_tbl(user_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE log_type_tbl (
+   log_type_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   log_type_name VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE log_detail_tbl (
+   log_detail_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   log_detail_name VARCHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE log_date_tbl (
+   log_date_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   log_date_day INT NOT NULL,
+   log_date_month INT NOT NULL,
+   log_date_year INT NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE log_tbl (
+   log_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   log_name TEXT NOT NULL,
+   log_value TEXT NOT NULL,
+   log_date_id INT NOT NULL,
+   log_type_id INT NOT NULL,
+   log_detail_id INT NOT NULL,
+   user_id INT NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES user_tbl(user_id)
+) ENGINE=InnoDB;
